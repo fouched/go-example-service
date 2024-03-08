@@ -22,14 +22,6 @@ func (m *exampleService) Execute(args []string, r <-chan svc.ChangeRequest, chan
 	tick := fasttick
 	changes <- svc.Status{State: svc.Running, Accepts: cmdsAccepted}
 
-	//f, err := os.OpenFile("c:/dev/test.log",
-	//	os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0644)
-	//if err != nil {
-	//	fmt.Println(err)
-	//	return
-	//}
-	//defer f.Close()
-
 loop:
 	for {
 		select {
@@ -62,7 +54,6 @@ loop:
 }
 
 func runService(name string, isDebug bool) {
-	fmt.Println("runService")
 	var err error
 	if isDebug {
 		elog = debug.New(name)
@@ -76,7 +67,7 @@ func runService(name string, isDebug bool) {
 
 	fmt.Println("runService 2")
 
-	//elog.Info(1, fmt.Sprintf("starting %s service", name))
+	elog.Info(1, fmt.Sprintf("starting %s service", name))
 	run := svc.Run
 	if isDebug {
 		run = debug.Run
